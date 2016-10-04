@@ -1,0 +1,29 @@
+#---------------------------------# 
+#      environment configuration  # 
+#---------------------------------# 
+version: 1.0.{build}
+os: WMF 5
+install:
+  - ps: . .\AppVeyor\AppVeyorInstall.ps1
+
+environment:
+  NuGetApiKey:
+    secure: DVwTEyLF7QDu3hlYtGbgxfyyqPCz98ZOMO3E8qfg/r0EwlC1hPU+LsLy+0Xb9r+L
+  ModuleName: ShrinkDaDataBase
+#---------------------------------# 
+#      build configuration        # 
+#---------------------------------# 
+build_script: 
+  - ps: . .\AppVeyor\AppVeyorBuild.ps1
+
+#---------------------------------# 
+#      test configuration         # 
+#---------------------------------# 
+test_script: 
+  - ps: . .\AppVeyor\AppVeyorTest.ps1
+
+#---------------------------------# 
+#      deployment configuration   # 
+#---------------------------------# 
+deploy_script: 
+  - ps: . .\AppVeyor\AppveyorDeploy.ps1

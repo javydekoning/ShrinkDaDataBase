@@ -13,7 +13,7 @@ Write-Host "Installed NuGet version '$($pkg.version)'"
 #---------------------------------# 
 # Install Modules                 # 
 #---------------------------------# 
-$RequiredModules = 'PSScriptAnalyzer','Pester',
+$RequiredModules = 'PSScriptAnalyzer','Pester'
 Install-Module -Name $RequiredModules -Repository PSGallery -Force -ErrorAction Stop
 
 #---------------------------------# 

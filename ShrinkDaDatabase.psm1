@@ -82,13 +82,13 @@ function Shrink-DaDatabase {
   param()
 
   process {
-      $ConnectionString = 'Server=np:\\.\pipe\MICROSOFT##WID\tsql\query;Integrated Security=True;Initial Catalog=RaAcctDb;'
+      $ConnectionString = 'Server=np:\\.\pipe\MICROSOFT##WID\tsql\query;Integrated Security=True;Initial Catalog=RaAcctDb;MultipleActiveResultSets=True'
       Write-Verbose "Connecting using: '$ConnectionString'"
 
       if ($PSCmdlet.ShouldProcess('.','Creating index')) {
         try {
           #Setup Connection to WID
-          $Connection       = New-Object System.Data.SqlClient.SqlConnection
+          $Connection                  = New-Object System.Data.SqlClient.SqlConnection
           $Connection.ConnectionString = $ConnectionString
           $Connection.Open()
 
@@ -96,14 +96,13 @@ function Shrink-DaDatabase {
           $Query                = $Connection.CreateCommand()
           $query.CommandTimeout = 3600
           $Query.CommandText    = "DBCC SHRINKFILE ('RaAcctDb_log')`r`n"
-          $Query.ExecuteReader()
-          $Query = $null
+          $Null = $Query.ExecuteReader()
           
           #ShrinkDB_Log
           $Query                = $Connection.CreateCommand()
           $query.CommandTimeout = 3600
           $Query.CommandText    = "DBCC SHRINKFILE ('RaAcctDb')`r`n"
-          $Query.ExecuteReader()          
+          $Null = $Query.ExecuteReader()        
                  
           #Close connection and return object
           $Connection.Close()
